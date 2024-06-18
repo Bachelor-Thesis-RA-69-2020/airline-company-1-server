@@ -3,7 +3,6 @@ const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const sequelize = require('./configuration/database');
 const swaggerSpec = require('./configuration/swagger');
-const userRoutes = require('./routes/flightRoutes');
 const airportRoutes = require('./routes/airportRoutes');
 const { migrateAirports } = require('./configuration/airportData');
 
