@@ -20,6 +20,5 @@ function toDTOList(airports) {
 }
 
 module.exports = {
-  toDTO,
-  toDTOList,
+  toDTOList
 };;

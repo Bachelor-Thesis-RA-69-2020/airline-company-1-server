@@ -10,5 +10,5 @@ const isFutureDate = (date, throwError = false) => {
 };
   
 module.exports = {
-    isFutureDate,
+    isFutureDate
 };

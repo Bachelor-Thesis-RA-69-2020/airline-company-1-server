@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../configuration/database');
 const { Airport } = require('./Airport');
-const { Ticket } = require('./Ticket');
 
 const Flight = sequelize.define('Flight', {
   id: {

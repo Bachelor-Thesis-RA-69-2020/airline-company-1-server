@@ -1,3 +1,7 @@
+const express = require('express');
+const router = express.Router();
+const airportController = require('../controller/airportController');
+
 /**
  * @swagger
  * tags:
@@ -33,10 +37,6 @@
  *         municipality:
  *           type: string
  */
-
-const express = require('express');
-const router = express.Router();
-const airportController = require('../controller/airportController');
 
 /**
  * @swagger

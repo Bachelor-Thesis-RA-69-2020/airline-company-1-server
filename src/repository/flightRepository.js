@@ -1,4 +1,3 @@
-const { Op } = require('sequelize');
 const { Flight } = require('../model/domain/Flight');
 const { Airport } = require('../model/domain/Airport');
 const { Ticket } = require('../model/domain/Ticket');

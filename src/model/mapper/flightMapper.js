@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const { Flight } = require('../domain/Flight');
 const hasher = require('../../utility/hasher');
 

@@ -1,8 +1,8 @@
 async function create(discount) {
     return await discount.save();
-  }
-  
-  module.exports = {
-      create
-  };
+}
+
+module.exports = {
+    create
+};
   

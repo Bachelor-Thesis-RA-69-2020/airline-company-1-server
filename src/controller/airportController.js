@@ -21,5 +21,5 @@ async function search(req, res) {
 
 module.exports = {
     findAll,
-    search,
+    search
 };

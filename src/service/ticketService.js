@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const ticketRepository = require('../repository/ticketRepository');
 const hasher = require('../utility/hasher');
 const { Ticket } = require('../model/domain/Ticket');

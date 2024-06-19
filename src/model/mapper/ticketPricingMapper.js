@@ -1,5 +1,4 @@
 const TicketPricing = require('../domain/TicketPricing');
-const FlightCreationDTO = require('../dto/FlightCreationDTO');
 
 function fromDTO(flightDTO) {
     return new TicketPricing(
