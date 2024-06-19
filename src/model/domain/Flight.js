@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../../configuration/database');
 const { Airport } = require('./Airport');
+const { Ticket } = require('./Ticket');
 
 const Flight = sequelize.define('Flight', {
   id: {
@@ -13,10 +14,10 @@ const Flight = sequelize.define('Flight', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Flight number is required',
+        msg: 'Validation: Flight number is required',
       },
       notEmpty: {
-        msg: 'Flight number cannot be empty',
+        msg: 'Validation: Flight number cannot be empty',
       },
     },
   },
@@ -25,7 +26,7 @@ const Flight = sequelize.define('Flight', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Departure datetime is required',
+        msg: 'Validation: Departure datetime is required',
       },
     },
   },
@@ -34,7 +35,7 @@ const Flight = sequelize.define('Flight', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Arrival datetime is required',
+        msg: 'Validation: Arrival datetime is required',
       },
       isAfterDeparture: function(value) {
         if (value <= this.departureDatetime) {
@@ -48,11 +49,11 @@ const Flight = sequelize.define('Flight', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Duration in minutes is required',
+        msg: 'Validation: Duration in minutes is required',
       },
       min: {
         args: [1],
-        msg: 'Duration must be greater than 0',
+        msg: 'Validation: Duration must be greater than 0',
       },
     },
   },
@@ -61,10 +62,27 @@ const Flight = sequelize.define('Flight', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Baggage allowance is required',
+        msg: 'Validation: Baggage allowance is required',
       },
       notEmpty: {
-        msg: 'Baggage allowance cannot be empty',
+        msg: 'Validation: Baggage allowance cannot be empty',
+      },
+    },
+  },
+  childrenDiscount: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: {
+      notNull: {
+        msg: 'Validation: Children discount is required',
+      },
+      min: {
+        args: [0],
+        msg: 'Validation: Children discount must be at least 0',
+      },
+      max: {
+        args: [100],
+        msg: 'Validation: Children discount must be at most 100',
       },
     },
   },
@@ -77,7 +95,7 @@ const Flight = sequelize.define('Flight', {
     },
     validate: {
       notNull: {
-        msg: 'Origin airport ID is required',
+        msg: 'Validation: Origin airport ID is required',
       },
     },
   },
@@ -90,7 +108,7 @@ const Flight = sequelize.define('Flight', {
     },
     validate: {
       notNull: {
-        msg: 'Destination airport ID is required',
+        msg: 'Validation: Destination airport ID is required',
       },
       notEqualOrigin: function(value) {
         if (value === this.originId) {
@@ -102,9 +120,6 @@ const Flight = sequelize.define('Flight', {
 }, {
   timestamps: false,
 });
-
-Flight.belongsTo(Airport, { as: 'origin', foreignKey: 'originId' });
-Flight.belongsTo(Airport, { as: 'destination', foreignKey: 'destinationId' });
 
 Flight.setOriginAndDestination = function (flight, originId, destinationId) {
   flight.originId = originId;

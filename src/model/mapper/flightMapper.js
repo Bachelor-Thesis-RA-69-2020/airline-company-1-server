@@ -8,8 +8,9 @@ function fromDTO(flightDTO, originAirport, destinationAirport) {
     arrivalDatetime: flightDTO.arrivalDatetime,
     durationMinutes: calculateDuration(flightDTO.departureDatetime, flightDTO.arrivalDatetime),
     baggageAllowance: flightDTO.baggageAllowance,
+    childrenDiscount: flightDTO.childrenDiscount,
     originId: originAirport.id,
-    destinationId: destinationAirport.id,
+    destinationId: destinationAirport.id
   });
 }
 

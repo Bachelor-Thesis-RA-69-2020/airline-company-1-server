@@ -4,13 +4,14 @@ async function create(req, res) {
   const flightInformation = req.body;
 
   try {
-    const flightDTO = await flightService.create(flightInformation);
+    await flightService.create(flightInformation);
     res.status(201).json({ message: 'Flight created.' });
   } catch (error) {
-    if (error.message.includes('Airport with IATA code')) {
-      res.status(400).json({ error: error.message });
+    msg = error.message
+    if (msg.includes('Airport with IATA code') || msg.includes('Validation')) {
+      res.status(400).json({ error: msg });
     } else {
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error: msg });
     }
   }
 }

@@ -4,6 +4,7 @@ const ticketPricingMapper = require('../model/mapper/ticketPricingMapper');
 const flightRepository = require('../repository/flightRepository');
 const airportService = require('../service/airportService');
 const ticketService = require('../service/ticketService');
+const dateValidator = require('../utility/dateValidator');
 const { Flight } = require('../model/domain/Flight');
 
 async function create(flightInformation) {
@@ -14,8 +15,10 @@ async function create(flightInformation) {
         const originAirport = await airportService.checkIfExists(flightInformation.originIATA);
         const destinationAirport = await airportService.checkIfExists(flightInformation.destinationIATA);
 
-        let flight = flightMapper.fromDTO(flightInformation, originAirport, destinationAirport);
+        let flight = flightMapper.fromDTO(flightInformation);
         Flight.setOriginAndDestination(flightMapper, originAirport.id, destinationAirport.id);
+
+        dateValidator.isFutureDate(flight.departureDatetime, true);
 
         flight = await flightRepository.create(flight, { transaction });
         
@@ -29,6 +32,17 @@ async function create(flightInformation) {
     }
 }
 
+async function findByFlightNumber(flightNumber) {
+    const flight = await flightRepository.findByFlightNumber(flightNumber);
+
+    if (!flight) {
+        throw new Error(`Flight with flight number ${flightNumber} does not exist.`);
+    }
+
+    return flight;
+}
+
 module.exports = {
-    create
+    create,
+    findByFlightNumber
 };

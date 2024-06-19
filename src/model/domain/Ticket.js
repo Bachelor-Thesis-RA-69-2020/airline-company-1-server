@@ -14,10 +14,10 @@ const Ticket = sequelize.define('Ticket', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Ticket code is required',
+        msg: 'Validation: Ticket code is required',
       },
       notEmpty: {
-        msg: 'Ticket code cannot be empty',
+        msg: 'Validation: Ticket code cannot be empty',
       },
     },
   },
@@ -26,11 +26,11 @@ const Ticket = sequelize.define('Ticket', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Ticket price is required',
+        msg: 'Validation: Ticket price is required',
       },
       min: {
         args: [0],
-        msg: 'Ticket price must be greater than or equal to 0',
+        msg: 'Validation: Ticket price must be greater than or equal to 0',
       },
     },
   },
@@ -39,7 +39,7 @@ const Ticket = sequelize.define('Ticket', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Ticket type is required',
+        msg: 'Validation: Ticket type is required',
       },
     },
   },
@@ -57,14 +57,12 @@ const Ticket = sequelize.define('Ticket', {
     },
     validate: {
       notNull: {
-        msg: 'Flight ID is required',
+        msg: 'Validation: Flight ID is required',
       },
     },
   },
 }, {
   timestamps: false,
 });
-
-Ticket.belongsTo(Flight, { foreignKey: 'flightId' });
 
 module.exports = { Ticket };

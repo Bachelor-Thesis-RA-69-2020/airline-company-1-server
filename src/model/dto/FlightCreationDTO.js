@@ -10,7 +10,8 @@ class FlightCreationDTO {
       businessTicketsCount,
       businessPrice,
       firstTicketsCount,
-      firstPrice
+      firstPrice,
+      childrenDiscount
     ) {
       this.departureDatetime = departureDatetime;
       this.arrivalDatetime = arrivalDatetime;
@@ -23,6 +24,7 @@ class FlightCreationDTO {
       this.businessPrice = businessPrice;
       this.firstTicketsCount = firstTicketsCount;
       this.firstPrice = firstPrice;
+      this.childrenDiscount = childrenDiscount;
     }
   }
   

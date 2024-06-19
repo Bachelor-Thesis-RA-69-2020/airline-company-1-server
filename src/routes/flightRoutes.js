@@ -24,6 +24,9 @@ const flightController = require('../controller/flightController');
  *           format: date-time
  *         baggageAllowance:
  *           type: string
+ *         childrenDiscount:
+ *           type: number
+ *           format: float
  *         originIATA:
  *           type: string
  *         destinationIATA:

@@ -12,10 +12,10 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Airport name is required',
+        msg: 'Validation: Airport name is required',
       },
       notEmpty: {
-        msg: 'Airport name cannot be empty',
+        msg: 'Validation: Airport name cannot be empty',
       },
     },
   },
@@ -24,10 +24,10 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'IATA code is required',
+        msg: 'Validation: IATA code is required',
       },
       notEmpty: {
-        msg: 'IATA code cannot be empty',
+        msg: 'Validation: IATA code cannot be empty',
       },
     },
   },
@@ -36,15 +36,15 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Latitude is required',
+        msg: 'Validation: Latitude is required',
       },
       min: {
         args: [-90],
-        msg: 'Latitude must be at least -90',
+        msg: 'Validation: Latitude must be at least -90',
       },
       max: {
         args: [90],
-        msg: 'Latitude must be at most 90',
+        msg: 'Validation: Latitude must be at most 90',
       },
     },
   },
@@ -53,15 +53,15 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Longitude is required',
+        msg: 'Validation: Longitude is required',
       },
       min: {
         args: [-180],
-        msg: 'Longitude must be at least -180',
+        msg: 'Validation: Longitude must be at least -180',
       },
       max: {
         args: [180],
-        msg: 'Longitude must be at most 180',
+        msg: 'Validation: Longitude must be at most 180',
       },
     },
   },
@@ -70,7 +70,7 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Elevation is required',
+        msg: 'Validation: Elevation is required',
       },
     },
   },
@@ -79,10 +79,10 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Continent is required',
+        msg: 'Validation: Continent is required',
       },
       notEmpty: {
-        msg: 'Continent cannot be empty',
+        msg: 'Validation: Continent cannot be empty',
       },
     },
   },
@@ -91,10 +91,10 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Country is required',
+        msg: 'Validation: Country is required',
       },
       notEmpty: {
-        msg: 'Country cannot be empty',
+        msg: 'Validation: Country cannot be empty',
       },
     },
   },
@@ -103,10 +103,10 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Region is required',
+        msg: 'Validation: Region is required',
       },
       notEmpty: {
-        msg: 'Region cannot be empty',
+        msg: 'Validation: Region cannot be empty',
       },
     },
   },
@@ -115,10 +115,10 @@ const Airport = sequelize.define('Airport', {
     allowNull: false,
     validate: {
       notNull: {
-        msg: 'Municipality is required',
+        msg: 'Validation: Municipality is required',
       },
       notEmpty: {
-        msg: 'Municipality cannot be empty',
+        msg: 'Validation: Municipality cannot be empty',
       },
     },
   },
