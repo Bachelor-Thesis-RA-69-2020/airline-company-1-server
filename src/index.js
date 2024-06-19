@@ -4,6 +4,7 @@ const swaggerUi = require('swagger-ui-express');
 const sequelize = require('./configuration/database');
 const swaggerSpec = require('./configuration/swagger');
 const airportRoutes = require('./routes/airportRoutes');
+const flightRoutes = require('./routes/flightRoutes');
 const { migrateAirports } = require('./configuration/airportData');
 
 const app = express();
@@ -16,6 +17,7 @@ const SWAGGER_PATH = process.env.SWAGGER_PATH;
 app.use(`/${SWAGGER_PATH}`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json());
 app.use(`/${APP_PATH}`, airportRoutes);
+app.use(`/${APP_PATH}`, flightRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
