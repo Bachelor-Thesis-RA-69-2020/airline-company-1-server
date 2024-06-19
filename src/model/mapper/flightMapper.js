@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const { Flight } = require('../domain/Flight');
+const hasher = require('../../utility/hasher');
 
 function fromDTO(flightDTO, originAirport, destinationAirport) {
   return Flight.build({
@@ -15,9 +16,8 @@ function fromDTO(flightDTO, originAirport, destinationAirport) {
 }
 
 function generateFlightNumber(departureDatetime, arrivalDatetime, originId, destinationId) {
-  const hash = crypto.createHash('sha256')
-    .update(`${departureDatetime}${arrivalDatetime}${originId}${destinationId}`)
-    .digest('hex');
+  const id = `${departureDatetime}${arrivalDatetime}${originId}${destinationId}`;
+  const hash = hasher.hash(id);
 
   const flightNumber = 'AL1-' + hash.substring(0, 10).toUpperCase();
   

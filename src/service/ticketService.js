@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const ticketRepository = require('../repository/ticketRepository');
+const hasher = require('../utility/hasher');
 const { Ticket } = require('../model/domain/Ticket');
 
 async function createAllTickets(flightId, pricing, transaction) {
@@ -22,9 +23,8 @@ async function createClassTickets(flightId, flightClass, count, price, transacti
 }
 
 function generateTicketCode(flightId, flightClass, serialNumber) {
-    const hash = crypto.createHash('sha256')
-      .update(`${flightId}${flightClass}${serialNumber}`)
-      .digest('hex');
+    const id = `${flightId}${flightClass}${serialNumber}`;
+    const hash = hasher.hash(id);
   
     const code = `AL1-${flightClass}-${hash.substring(0, 10).toUpperCase()}`;
     

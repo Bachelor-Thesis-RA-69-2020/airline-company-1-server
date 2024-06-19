@@ -9,6 +9,6 @@ const isFutureDate = (date, throwError = false) => {
     return isFuture;
 };
   
-  module.exports = {
+module.exports = {
     isFutureDate,
 };
