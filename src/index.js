@@ -33,6 +33,7 @@ app.get('/', (req, res) => {
 Flight.belongsTo(Airport, { as: 'origin', foreignKey: 'originId' });
 Flight.belongsTo(Airport, { as: 'destination', foreignKey: 'destinationId' });
 Flight.hasMany(Ticket, { as: 'tickets', foreignKey: 'flightId' });
+Flight.hasMany(Discount, { as: 'discounts', foreignKey: 'flightId' });
 Ticket.belongsTo(Flight, { foreignKey: 'flightId' });
 Discount.belongsTo(Flight, { foreignKey: 'flightId' });
 
