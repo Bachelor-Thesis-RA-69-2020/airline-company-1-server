@@ -16,15 +16,15 @@ async function create(flightInformation) {
         const destinationAirport = await airportService.checkIfExists(flightInformation.destinationIATA);
 
         let flight = flightMapper.fromDTO(flightInformation);
-        Flight.setOriginAndDestination(flightMapper, originAirport.id, destinationAirport.id);
+        Flight.setOriginAndDestination(flight, originAirport.id, destinationAirport.id);
 
         dateValidator.isFutureDate(flight.departureDatetime, true);
 
         flight = await flightRepository.create(flight, { transaction });
-        
+
         const ticketPricing = ticketPricingMapper.fromDTO(flightInformation);
         await ticketService.createAllTickets(flight.id, ticketPricing, transaction);
-
+        
         await transaction.commit();
     } catch (error) {
         if (transaction) await transaction.rollback();

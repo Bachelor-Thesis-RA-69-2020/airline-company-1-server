@@ -16,7 +16,7 @@ function toDTO(airport) {
 }
 
 function toDTOList(airports) {
-  return airports.map(airport => this.toDTO(airport));
+  return airports.map(airport => toDTO(airport));
 }
 
 module.exports = {

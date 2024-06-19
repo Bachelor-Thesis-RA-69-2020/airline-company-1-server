@@ -1,16 +1,14 @@
 const { Flight } = require('../domain/Flight');
 const hasher = require('../../utility/hasher');
 
-function fromDTO(flightDTO, originAirport, destinationAirport) {
+function fromDTO(flightDTO) {
   return Flight.build({
     flightNumber: generateFlightNumber(flightDTO.departureDatetime, flightDTO.arrivalDatetime, flightDTO.originId, flightDTO.destinationId),
     departureDatetime: flightDTO.departureDatetime,
     arrivalDatetime: flightDTO.arrivalDatetime,
     durationMinutes: calculateDuration(flightDTO.departureDatetime, flightDTO.arrivalDatetime),
     baggageAllowance: flightDTO.baggageAllowance,
-    childrenDiscount: flightDTO.childrenDiscount,
-    originId: originAirport.id,
-    destinationId: destinationAirport.id
+    childrenDiscount: flightDTO.childrenDiscount
   });
 }
 
