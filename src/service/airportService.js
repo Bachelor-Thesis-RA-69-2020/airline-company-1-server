@@ -13,7 +13,18 @@ async function search(search) {
     return airportDTOs;
 }
 
+async function checkIfExists(iata) {
+    const airport = await airportRepository.findByIATA(iata);
+
+    if (!airport) {
+        throw new Error(`Airport with IATA code ${iata.toUpperCase()} does not exist.`);
+    }
+
+    return airport;
+}
+
 module.exports = {
     findAll,
     search,
+    checkIfExists
 };

@@ -16,7 +16,18 @@ async function findAllBySearch(search) {
   });
 }
 
+async function findByIATA(iata) {
+  return await Airport.findOne({
+    where: {
+      iata: {
+        [Op.iLike]: iata
+      }
+    }
+  });
+}
+
 module.exports = {
     findAll,
-  findAllBySearch,
+    findAllBySearch,
+    findByIATA
 };
