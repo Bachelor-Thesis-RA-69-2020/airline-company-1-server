@@ -74,8 +74,14 @@ const Discount = sequelize.define('Discount', {
   timestamps: false,
 });
 
-Discount.setFlight = function (discount, flightId) {
-  discount.flightId = flightId;
+Discount.prototype.setFlight = function (flightId) {
+  this.flightId = flightId;
+};
+
+Discount.prototype.isActive = function () {
+  const currentDate = new Date();
+  const isActive = this.validFrom <= currentDate && this.validTo >= currentDate
+  return isActive;
 };
 
 module.exports = { Discount };

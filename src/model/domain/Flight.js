@@ -120,9 +120,34 @@ const Flight = sequelize.define('Flight', {
   timestamps: false,
 });
 
-Flight.setOriginAndDestination = function (flight, originId, destinationId) {
-  flight.originId = originId;
-  flight.destinationId = destinationId;
+Flight.prototype.setOriginAndDestination = function (originId, destinationId) {
+  if (originId === destinationId) {
+    throw new Error('Validation: Origin and destination cannot be the same.');
+  }
+
+  this.originId = originId;
+  this.destinationId = destinationId;
+};
+
+Flight.prototype.findPriceByClass = function (flightClass) {
+  const ticket = this.tickets.find(ticket => ticket.type == flightClass);
+  return ticket ? ticket.price : -100;
+};
+
+Flight.prototype.countAvailableTickets = function (flightClass) {
+  let count = 0;
+  this.tickets.forEach(ticket => {
+    classFilter = flightClass ? (ticket.type === flightClass) : true; 
+    if (classFilter && !ticket.isBought) {
+      count++;
+    }
+  });
+  return count;
+};
+
+Flight.prototype.findDiscount = function () {
+  const discount = this.discounts.find(discount => discount.isActive());
+  return discount ? discount.percentage : 0;
 };
 
 module.exports = { Flight };

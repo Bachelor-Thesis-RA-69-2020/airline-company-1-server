@@ -1,5 +1,6 @@
 const { Flight } = require('../domain/Flight');
 const hasher = require('../../utility/hasher');
+const FlightDTO = require('../dto/FlightDTO');
 
 function fromDTO(flightDTO) {
   return Flight.build({
@@ -10,6 +11,30 @@ function fromDTO(flightDTO) {
     baggageAllowance: flightDTO.baggageAllowance,
     childrenDiscount: flightDTO.childrenDiscount
   });
+}
+
+function toDTO(flight) {
+  return new FlightDTO(
+    flight.flightNumber,
+    flight.origin.iata + " - " + flight.origin.name,
+    flight.destination.iata + " - " + flight.destination.name,
+    flight.departureDatetime,
+    flight.arrivalDatetime,
+    flight.durationMinutes,
+    flight.baggageAllowance,
+    flight.countAvailableTickets('Economy'),
+    flight.findPriceByClass('Economy'),
+    flight.countAvailableTickets('Business'),
+    flight.findPriceByClass('Business'),
+    flight.countAvailableTickets('First'),
+    flight.findPriceByClass('First'),
+    flight.findDiscount(),
+    flight.childrenDiscount
+  );
+}
+
+function toDTOList(flights) {
+  return flights.map(flight => toDTO(flight));
 }
 
 function generateFlightNumber(departureDatetime, arrivalDatetime, originId, destinationId) {
@@ -27,5 +52,7 @@ function calculateDuration(departureDatetime, arrivalDatetime) {
 }
 
 module.exports = {
-  fromDTO
+  fromDTO,
+  toDTO,
+  toDTOList
 };
