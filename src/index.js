@@ -6,12 +6,14 @@ const swaggerSpec = require('./configuration/swagger');
 const airportRoutes = require('./routes/airportRoutes');
 const flightRoutes = require('./routes/flightRoutes');
 const discountRoutes = require('./routes/discountRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
 const { migrateAirports } = require('./configuration/airportData');
 
 const { Airport } = require('./model/domain/Airport');
 const { Flight } = require('./model/domain/Flight');
 const { Ticket } = require('./model/domain/Ticket');
 const { Discount } = require('./model/domain/Discount');
+const { Booking } = require('./model/domain/Booking');
 
 const app = express();
 const APP_PORT = process.env.APP_PORT;
@@ -25,6 +27,7 @@ app.use(express.json());
 app.use(`/${APP_PATH}`, airportRoutes);
 app.use(`/${APP_PATH}`, flightRoutes);
 app.use(`/${APP_PATH}`, discountRoutes);
+app.use(`/${APP_PATH}`, bookingRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -35,6 +38,7 @@ Flight.belongsTo(Airport, { as: 'destination', foreignKey: 'destinationId' });
 Flight.hasMany(Ticket, { as: 'tickets', foreignKey: 'flightId' });
 Flight.hasMany(Discount, { as: 'discounts', foreignKey: 'flightId' });
 Ticket.belongsTo(Flight, { foreignKey: 'flightId' });
+Ticket.belongsTo(Booking, { as: 'booking', foreignKey: 'bookingId' });
 Discount.belongsTo(Flight, { foreignKey: 'flightId' });
 
 const startServer = async () => {

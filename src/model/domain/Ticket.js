@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const sequelize = require('../../configuration/database');
 const { Flight } = require('./Flight');
 const { FlightClass } = require('./enum/FlightClass');
+const { Booking } = require('./Booking');
 
 const Ticket = sequelize.define('Ticket', {
   id: {
@@ -61,8 +62,21 @@ const Ticket = sequelize.define('Ticket', {
       },
     },
   },
+  bookingId: {
+    type: Sequelize.INTEGER,
+    allowNull: true,
+    references: {
+      model: Booking,
+      key: 'id',
+    },
+  },
 }, {
   timestamps: false,
 });
+
+Ticket.prototype.buy = function (bookingId) {
+  this.isBought = true;
+  this.bookingId = bookingId;
+};
 
 module.exports = { Ticket };

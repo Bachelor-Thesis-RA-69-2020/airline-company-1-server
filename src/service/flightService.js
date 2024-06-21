@@ -49,18 +49,14 @@ async function findByFlightNumber(flightNumber, mapToDTO = false) {
 
 async function search(from, to, origin, destination, flightClass, passengerCount) {
     let flights = await flightRepository.findAll();
-    console.log("1: " + flights.length)
+
     if (!flights || flights.length === 0) {
         return [];
     }
 
-    console.log("2: " + flights.length)
     flights = await searchByDateRange(flights, from, to);
-    console.log("3: " + flights.length)
     flights = await searchByRelation(flights, origin, destination);
-    console.log("4: " + flights.length)
     flights = await searchByPassengerInformation(flights, flightClass, passengerCount);
-    console.log("5: " + flights.length)
 
     const flightDTOs = flightMapper.toDTOList(flights);
     
@@ -71,12 +67,10 @@ async function searchByDateRange(flights, from, to) {
     if (from && to && from >= to) {
         throw new Error('Validation: From date must be before To date.');
     }
-    console.log("11: " + flights.length)
 
     flights = await searchByFrom(flights, from);
-    console.log("12: " + flights.length)
     flights = await searchByTo(flights, to);
-    console.log("13: " + flights.length)
+
     return flights;
 }
 
@@ -113,8 +107,7 @@ async function searchByPassengerInformation(flights, flightClass, passengerCount
 }
 
 async function searchByFrom(flights, from) {
-    console.log(from)
-    console.log(flights[0].departureDatetime)
+
     if(from) {
         flights = flights.filter(flight => flight.departureDatetime >= from);
     }

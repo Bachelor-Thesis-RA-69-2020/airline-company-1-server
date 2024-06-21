@@ -39,10 +39,6 @@ async function search(req, res) {
   const destination = req.query.destination;
   const flightClass = req.query.flightClass;
   const passengerCount = req.query.passengerCount ? parseInt(req.query.passengerCount) : 1;
-  console.log(from)
-  console.log(to)
-  console.log(req.params.from)
-  console.log(req.params.to)
   
   try {
     const flights = await flightService.search(from, to, origin, destination, flightClass, passengerCount);

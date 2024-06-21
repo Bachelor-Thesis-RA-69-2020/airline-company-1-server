@@ -145,6 +145,11 @@ Flight.prototype.countAvailableTickets = function (flightClass) {
   return count;
 };
 
+Flight.prototype.findAvailableTicket = function (flightClass) {
+  const ticket = this.tickets.find(ticket => ticket.type == flightClass && !ticket.isBought);
+  return ticket;
+};
+
 Flight.prototype.findDiscount = function () {
   const discount = this.discounts.find(discount => discount.isActive());
   return discount ? discount.percentage : 0;

@@ -1,4 +1,5 @@
 const ticketRepository = require('../repository/ticketRepository');
+const flightRepository = require('../repository/flightRepository');
 const hasher = require('../utility/hasher');
 const { Ticket } = require('../model/domain/Ticket');
 
@@ -24,12 +25,43 @@ async function createClassTickets(flightId, flightClass, count, price, transacti
 function generateTicketCode(flightId, flightClass, serialNumber) {
     const id = `${flightId}${flightClass}${serialNumber}`;
     const hash = hasher.hash(id);
-  
+
     const code = `AL1-${flightClass}-${hash.substring(0, 10).toUpperCase()}`;
     
     return code;
+}
+
+async function buy(flightNumber, flightClass, bookingId, transaction) {
+  const flight = await findByFlightNumber(flightNumber);
+  
+  const ticket = flight.findAvailableTicket(flightClass);
+
+  if (!ticket) {
+    throw new Error(`No available ${flightClass} class ticket found for flight with flight number ${flightNumber}.`);
   }
 
+  ticket.buy(bookingId);
+
+  await ticketRepository.update(ticket, { transaction });
+}
+
+async function findByFlightNumber(flightNumber, mapToDTO = false) {
+  const flight = await flightRepository.findByFlightNumber(flightNumber);
+
+  if (!flight) {
+      throw new Error(`Flight with flight number ${flightNumber} does not exist.`);
+  }
+
+  if(!mapToDTO) {
+      return flight;
+  }
+
+  const flightDTO = flightMapper.toDTO(flight);
+  
+  return flightDTO;
+}
+
 module.exports = {
-    createAllTickets
+    createAllTickets,
+    buy
 };
