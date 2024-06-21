@@ -1,14 +1,15 @@
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 
 async function sendTicketsEmail(recipientEmail, attachment) {
   let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // secure:false for TLS connection
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    secure: false,
     auth: {
-      user: 'psw2023grupa2@gmail.com',
-      pass: 'iqjm gqhi dgvs nyjc', // Replace with your Gmail app password or account password
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
@@ -16,13 +17,13 @@ async function sendTicketsEmail(recipientEmail, attachment) {
   const emailContent = await ejs.renderFile(templatePath);
 
   const mailOptions = {
-    from: 'psw2023grupa2@gmail.com',
-    to: recipientEmail, // <-- Ensure recipientEmail is passed correctly
-    subject: 'Booking Confirmation',
+    from: process.env.EMAIL_FROM,
+    to: recipientEmail,
+    subject: process.env.EMAIL_SUBJECT,
     html: emailContent,
     attachments: [
       {
-        filename: 'document.pdf',
+        filename: process.env.EMAIL_ATTACHMENT_NAME,
         content: attachment,
         encoding: 'base64',
       },

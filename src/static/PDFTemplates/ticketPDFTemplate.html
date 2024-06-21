@@ -1,26 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page </title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .content {
-      padding: 20px;
-      border: 1px solid #ccc;
-      background-color: #f0f0f0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Eclipse Air Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            display: table;
+            border: 1px solid black;
+            table-layout: fixed;
+        }
+        .left-section {
+            width: 70%;
+            display: table-cell;
+            height: 320px;
+            vertical-align: middle;
+            position: relative; 
+        }
+        .right-section {
+         border-left: 2px dashed black;
+            width: 30%;
+            display: table-cell;
+            height: 320px;
+            vertical-align: middle;
+            position: relative;
+        }
+        .content-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .top-bar {
+            width: 100%;
+            height: 70px;
+            background-color: #22baa8;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .top-bar .logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        .top-bar .logotext {
+            color: white;
+            font-size: 30px;
+            padding-bottom: 5px;
+        }
+        .middle-content {
+            width: 95%;
+            height: 220px;
+            background-color: white;
+            margin-top: 10px;
+            padding-left: 10px;
+        }
+        .bottom-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #22baa8;
+        }
+        .right-section .top-bar {
+            width: 100%;
+            height: 70px;
+            background-color: #22baa8;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .right-section .top-bar .boarding-text {
+            color: white;
+            font-size: 18px;
+            padding-top: 5px;
+        }
+        .right-section .middle-content {
+    width: 100%;
+    height: 220px;
+    background-color: white;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-section .middle-content .barcode-image {
+    width: 90%;
+    height: 50%;
+}
+.text {
+  font-size: 8px;
+}
+    </style>
 </head>
 <body>
-  <div class="content">
-    <h1>Page </h1>
-    <p>This is the content for page  of the PDF.</p>
-    <p>Dynamic Value: </p>
-  </div>
+
+    <div class="container">
+        <div class="left-section">
+            <div class="top-bar">
+                <img class="logo" src="https://static.vecteezy.com/system/resources/thumbnails/035/861/457/small_2x/abstract-white-plane-icon-png.png"/>
+                <span class="logotext">Eclipse Air</span>
+            </div>
+            <div class="middle-content">
+                <div style="margin-bottom: 10px;">
+                    <span style="font-size: 80px;">{originIATA}</span>
+                    <span style="font-size: 80px;">&nbsp;&rarr;&nbsp;</span>
+                    <span style="font-size: 80px;">{destinationIATA}</span>
+                </div>
+                <div class="text">
+                  Flight number: {flightNumber}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ticket code: {ticketCode}
+                </div>
+                <div>
+                  From: {origin}
+                </div>
+                <div>
+                  Destination: {destination}
+                </div>
+                <div>
+                  Departure: {departure}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Arrival: {arrival}
+                </div>
+                <div>
+                    Name: {name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of birth: {dateOfBirth}
+                </div>
+                <div>
+                    Passport number: {passportNumber}
+                </div>
+            </div>
+            <div class="bottom-bar"></div>
+        </div>
+        <div class="right-section">
+            <div class="top-bar">
+                <div class="boarding-text">Boarding Ticket - {flightClass}</div>
+            </div>
+            <div class="middle-content">
+            <img src="https://www.shutterstock.com/image-vector/horizontal-black-barcode-on-white-600nw-1221838477.jpg" class="barcode-image" alt="Barcode">
+            </div>
+            <div class="bottom-bar"></div>
+        </div>
+    </div>
+    
+    <div style="margin-bottom: 30px;"></div>
+    <div style="page-break-after: always;"></div>
+
 </body>
 </html>

@@ -7,7 +7,7 @@ const emailSender = require('../utility/emailSender');
 const PDFGenerator = require('../utility/PDFGenerator');
 
 async function bookAll(bookings) {
-    await flightService.findByFlightNumber(bookings.flightNumber);
+    const flight = await flightService.findByFlightNumber(bookings.flightNumber);
 
     const validFlightClasses = ['Economy', 'Business', 'First'];
     if (!bookings.flightClass || !validFlightClasses.includes(bookings.flightClass)) {
@@ -18,35 +18,34 @@ async function bookAll(bookings) {
     try {
         transaction = await sequelize.transaction();
 
+        const ticketCodes = []
         for (const passenger of bookings.passengers) {
-            await bookOne(bookings.flightNumber, bookings.flightClass, bookings.email, passenger, transaction);
+            const ticketCode = await bookOne(bookings.flightNumber, bookings.flightClass, bookings.email, passenger, transaction);
+            ticketCodes.push(ticketCode)
         }
         await transaction.commit();
-        generatePdfAndSendEmail();
+        generatePdfAndSendEmail(bookings.email, flight, bookings.flightClass, bookings.passengers, ticketCodes);
     } catch (error) {
-        console.log("alo\nalo\nalo\nalo")
         if (transaction) await transaction.rollback();
         throw error;
     }
 }
 
 async function bookOne(flightNumber, flightClass, email, passenger, transaction) {
-    console.log('ok1')
     let booking = bookingMapper.fromDTO(passenger);
     booking.setEmail(email);
 
     booking = await bookingRepository.create(booking, { transaction });
 
-    await ticketService.buy(flightNumber, flightClass, booking.id, transaction);
+    const ticketCode = await ticketService.buy(flightNumber, flightClass, booking.id, transaction);
+    return ticketCode;
 }
 
-async function generatePdfAndSendEmail() {
+async function generatePdfAndSendEmail(email, flight, flightClass, passengers, ticketCodes) {
     try {
-        // Generate PDF from template
-        const pdfBuffer = await PDFGenerator.generateTicketsPDF();
+        const pdfBuffer = await PDFGenerator.generateTicketsPDF(flight, flightClass, passengers, ticketCodes);
         
-        // Send email with PDF attachment
-        await emailSender.sendTicketsEmail("nikolicmarko1243@gmail.com", pdfBuffer);
+        await emailSender.sendTicketsEmail(email, pdfBuffer);
         
         console.log('Email with PDF attachment sent successfully.');
     } catch (error) {

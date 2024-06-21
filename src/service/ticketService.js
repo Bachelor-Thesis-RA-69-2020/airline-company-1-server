@@ -43,6 +43,7 @@ async function buy(flightNumber, flightClass, bookingId, transaction) {
   ticket.buy(bookingId);
 
   await ticketRepository.update(ticket, { transaction });
+  return ticket.code;
 }
 
 async function findByFlightNumber(flightNumber, mapToDTO = false) {
