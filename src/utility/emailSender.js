@@ -1,6 +1,8 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
+const fs = require('fs');
+const path = require('path');
 
 async function sendTicketsEmail(recipientEmail, attachment) {
   let transporter = nodemailer.createTransport({
@@ -27,6 +29,11 @@ async function sendTicketsEmail(recipientEmail, attachment) {
         content: attachment,
         encoding: 'base64',
       },
+      {
+        filename: process.env.EMAIL_LOGO_FILE_NAME,
+        path: path.join(__dirname, '../static/images/logo.png'),
+        cid: process.env.EMAIL_LOGO_CONTENT_ID
+      }
     ],
   };
 

@@ -16,7 +16,7 @@
             padding-block: 1rem;
             width: 100%;
             height: 3rem;
-            background-color: rgba(0, 0, 0, 1);
+            background-color: #22baa8;
             box-shadow: 0 5px 5px -2px rgba(0, 0, 0, 0.15);
         }
         .logo {
@@ -28,22 +28,15 @@
             margin-left: 1rem;
         }
         .logo-image {
-            height: 3rem;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            margin-top: 5px;
         }
-        .logo-text-1 {
+        .logo-text {
             font-family: Roboto, Arial;
-            font-size: 2rem;
+            font-size: 30px;
             color: rgba(255, 255, 255, 1);
-            font-weight: 500;
-            margin-left: 0.5rem;
-        }
-
-        .logo-text-2 {
-            font-family: Roboto, Arial;
-            font-size: 2rem;
-            color: rgba(220, 74, 50, 1);
-            font-weight: 500;
-            margin-left: -0.25rem;
         }
         .content {
             width: 100%;
@@ -76,51 +69,39 @@
             font-weight: 400;
             margin-bottom: 1rem;
         }
-        .line-1 {
+        .line {
             width: 100%;
-            height: 5px;
-            background-color: rgba(220, 74, 50, 1);
-        }
-        .line-2 {
-            width: 100%;
-            height: 5px;
-            background-color: rgba(0, 0, 0, 1);
+            height: 10px;
+            background-color: #22baa8;
         }
         .logo-link {
             color: inherit;
             text-decoration: none;
         }
-        .link {
-            text-decoration: underline;
-            cursor: pointer;
-            color: rgba(220, 74, 50, 1);
-        }
     </style>
 </head>
 <body>
     <div class="header">
-        <a class="logo-link" href="http://localhost:4200/">
+        <a class="logo-link" href="cid:logo.png">
             <span class="logo">
                 <img class="logo-image" src="cid:logo.png"/>
-                <div class="logo-text-1">Marke</div>
-                <div class="logo-text-2">Team</div>
+                <div class="logo-text">Eclipse Air</div>
             </span>
         </a>
     </div>
     <div class="content">
         <div class="title">
-            Ticket purchase
+            Ticket purchase confirmation
         </div>
         <div class="text">
-            You successfully purchased flight tickets.
+            We are pleased to inform you that your ticket purchase with Eclipse Air has been successfully processed. Your flight details and e-tickets are attached to this email as a PDF document. Please review the information carefully to ensure all details are correct.
         </div>
     </div>
     <div class="footer">
         <div class="signature">
-            &#169; 2024. MarkeTeam - All rights reserved
+            &#169; 2024. Eclipse Air - All rights reserved
         </div>
-        <div class="line-1"></div>
-        <div class="line-2"></div>
+        <div class="line"></div>
     </div>
 </body>
 </html>
