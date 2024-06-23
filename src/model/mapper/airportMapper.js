@@ -2,7 +2,6 @@ const AirportDTO = require('../dto/AirportDTO');
 
 function toDTO(airport) {
   return new AirportDTO(
-    airport.id,
     airport.name,
     airport.iata,
     airport.latitude,

@@ -1,6 +1,5 @@
 class AirportDTO {
-    constructor(id, name, iata, latitude, longitude, elevation, continent, country, region, municipality) {
-        this.id = id;
+    constructor(name, iata, latitude, longitude, elevation, continent, country, region, municipality) {
         this.name = name;
         this.iata = iata;
         this.latitude = latitude;
