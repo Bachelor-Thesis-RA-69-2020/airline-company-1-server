@@ -61,11 +61,17 @@
             padding-bottom: 5px;
         }
         .middle-content {
-            width: 95%;
-            height: 220px;
+            width: 99%;
+            height: 230px;
             background-color: white;
-            margin-top: 10px;
             padding-left: 10px;
+            padding-top: 10px;
+        }
+        .middle-content {
+            background-image: url("https://www.transparenttextures.com/patterns/polonez-pattern.png");
+            background-size: cover;
+            background-position: center;
+            box-sizing: border-box;
         }
         .bottom-bar {
             width: 100%;
@@ -89,9 +95,8 @@
         }
         .right-section .middle-content {
     width: 100%;
-    height: 220px;
+    height: 230px;
     background-color: white;
-    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,7 +126,7 @@
                     <span style="font-size: 80px;">{destinationIATA}</span>
                 </div>
                 <div class="text">
-                  Flight number: {flightNumber}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ticket code: {ticketCode}
+                  Flight number: {flightNumber}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ticket code: {ticketCode}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Passport number: {passportNumber}
                 </div>
                 <div>
                   From: {origin}
@@ -134,9 +139,6 @@
                 </div>
                 <div>
                     Name: {name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of birth: {dateOfBirth}
-                </div>
-                <div>
-                    Passport number: {passportNumber}
                 </div>
             </div>
             <div class="bottom-bar"></div>
